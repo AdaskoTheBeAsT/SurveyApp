@@ -9,13 +9,16 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         /// <summary>
         /// Adds MVC services to the specified <see cref="IServiceCollection" /> for Web API.
-        /// This is a slimmed down version of <see cref="MvcServiceCollectionExtensions.AddMvc"/>
+        /// This is a slimmed down version of MvcServiceCollectionExtensions.AddMvc.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
         /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC services.</returns>
         public static IMvcBuilder AddWebApi(this IServiceCollection services)
         {
-            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
 
             var builder = services.AddMvcCore();
 
@@ -28,21 +31,27 @@ namespace Microsoft.Extensions.DependencyInjection
 
         /// <summary>
         /// Adds MVC services to the specified <see cref="IServiceCollection" /> for Web API.
-        /// This is a slimmed down version of <see cref="MvcServiceCollectionExtensions.AddMvc"/>
+        /// This is a slimmed down version of MvcServiceCollectionExtensions.AddMvc.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
         /// <param name="setupAction">An <see cref="Action{MvcOptions}"/> to configure the provided <see cref="MvcOptions"/>.</param>
         /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC services.</returns>
         public static IMvcBuilder AddWebApi(this IServiceCollection services, Action<MvcOptions> setupAction)
         {
-            if (services == null) throw new ArgumentNullException(nameof(services));
-            if (setupAction == null) throw new ArgumentNullException(nameof(setupAction));
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+
+            if (setupAction == null)
+            {
+                throw new ArgumentNullException(nameof(setupAction));
+            }
 
             var builder = services.AddWebApi();
             builder.Services.Configure(setupAction);
 
             return builder;
         }
-
     }
 }

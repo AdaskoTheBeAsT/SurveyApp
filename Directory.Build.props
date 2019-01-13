@@ -1,0 +1,48 @@
+<Project>
+
+    <PropertyGroup Label="Package">
+        <Version>1.0.0</Version>
+        <Authors>Adam Pluciński</Authors>
+        <Company>Adam Pluciński</Company>
+        <Product>SurveyApp</Product>
+        <Description>SurveyApp</Description>
+        <Copyright>Copyright © 2019 Adam Pluciński. All rights Reserved</Copyright>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+    
+    <!-- Based on article https://www.thomaslevesque.com/2017/09/18/common-msbuild-properties-and-items-with-directory-build-props/ -->
+    <PropertyGroup>
+        <!-- Common ruleset shared by all projects -->
+        <CodeAnalysisRuleset>$(MSBuildThisFileDirectory)Survey.ruleset</CodeAnalysisRuleset>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <WarningsAsErrors />
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Add reference to analyzers to all projects  -->
+        <PackageReference Include="AsyncFixer" Version="1.1.6" PrivateAssets="all" />
+        <PackageReference Include="Asyncify" Version="0.9.7" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.2.12-alpha" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.3" PrivateAssets="all" />
+        <PackageReference Include="Roslynator.Analyzers" Version="2.0.0" PrivateAssets="all" />
+        <PackageReference Include="Roslynator.CodeFixes" Version="2.0.0" PrivateAssets="all" />
+        <PackageReference Include="SecurityCodeScan" Version="3.0.0" PrivateAssets="all" />
+        <PackageReference Include="SerilogAnalyzer" Version="0.15.0" PrivateAssets="all" />
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="7.10.0.7896" PrivateAssets="all" />
+        <PackageReference Include="StyleCop.Analyzers" Version="1.1.1-beta.61" PrivateAssets="all" />
+        
+        <!-- Common StyleCop configuration -->
+        <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" />
+    </ItemGroup>
+
+    <Target Name="CopyDocumentationFile" AfterTargets="ComputeFilesToPublish">
+        <ItemGroup>
+            <ResolvedFileToPublish Include="@(FinalDocFile)" RelativePath="@(FinalDocFile->'%(Filename)%(Extension)')" />
+        </ItemGroup>
+    </Target>
+
+</Project>
