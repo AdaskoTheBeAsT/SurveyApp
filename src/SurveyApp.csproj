@@ -16,7 +16,13 @@
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
     <Target Name="MakeMyDir" AfterTargets="Build">
-        <MakeDir Directories="$(OutDir)logs" Condition="!Exists('$(OutDir)logs')"  />
+        <MakeDir Directories="$(OutDir)logs" Condition="!Exists('$(OutDir)logs')" />
     </Target>
 </Project>
