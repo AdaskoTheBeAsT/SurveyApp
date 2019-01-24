@@ -26,6 +26,11 @@ namespace SurveyApp
             };
         }
 
+        public void ConfigureLoggingAfterIoC()
+        {
+            _container.RegisterInstance(LogConfiguration);
+        }
+
 #pragma warning disable CA1034
         public class AppLogConfiguration
         {
