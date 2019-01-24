@@ -11,7 +11,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  testProjects: []
+  testProjects:
 
 steps:
 - task: DotNetCoreInstaller@0
