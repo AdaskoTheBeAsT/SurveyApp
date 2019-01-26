@@ -11,7 +11,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  testProjects:
+  testProjects: '**/[Tt]ests?/*.csproj'
 
 steps:
 - task: DotNetCoreInstaller@0
@@ -31,7 +31,8 @@ steps:
     SonarCloud: 'SonarCloud SurveyApp'
     organization: 'adaskothebeast-github'
     projectKey: 'AdaskoTheBeAsT_SurveyApp'
-    projectName: SurveyApp    
+    projectName: SurveyApp
+    arguments: '/d:sonar.cs.vstest.reportsPaths="*/TestResults/.trx" /v:"2.0"'
 
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -43,7 +44,7 @@ steps:
   inputs:
     command: test
     projects: '$(testProjects)'
-    arguments: '--configuration $(buildConfiguration)'
+    arguments: '--configuration $(buildConfiguration) --collect:"Code Coverage" --logger:"trx;LogFileName=backend-results.trx"'
 
 - task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
   displayName: 'Run Code Analysis'
