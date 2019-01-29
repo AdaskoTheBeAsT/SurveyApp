@@ -20,6 +20,29 @@ steps:
     packageType: 'sdk'
     version: '2.2.103'
 
+- task: NodeTool@0
+  displayName: 'Use Node 10.15.x'
+  inputs:
+    versionSpec: 10.15.x
+
+- task: Npm@1
+  displayName: 'npm custom'
+  inputs:
+    command: custom
+    verbose: true
+    customCommand: 'install -g windows-build-tools'
+
+- task: geeklearningio.gl-vsts-tasks-yarn.yarn-installer-task.YarnInstaller@2
+  displayName: 'Use Yarn 1.x'
+  inputs:
+    checkLatest: true
+
+- task: geeklearningio.gl-vsts-tasks-yarn.yarn-task.Yarn@2
+  displayName: 'Yarn install'
+  inputs:
+    ProjectDirectory: src/SurveyApp/ClientApp
+    Arguments: install
+
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
