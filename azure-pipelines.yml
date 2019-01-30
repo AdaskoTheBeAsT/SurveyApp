@@ -24,6 +24,7 @@ steps:
   displayName: 'Use Node 10.15.x'
   inputs:
     versionSpec: 10.15.x
+  enabled: false
 
 - task: Npm@1
   displayName: 'npm custom'
@@ -31,6 +32,7 @@ steps:
     command: custom
     verbose: true
     customCommand: 'install -g windows-build-tools'
+  enabled: false
 
 - task: geeklearningio.gl-vsts-tasks-yarn.yarn-installer-task.YarnInstaller@2
   displayName: 'Use Yarn 1.x'
@@ -60,7 +62,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
-    arguments: '--configuration $(buildConfiguration)'
+    arguments: 'SurveyApp.sln --configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: Test
