@@ -3,20 +3,26 @@
  * See docs/coding-guide/e2e-tests.md for more info.
  */
 
-import { browser, element, by } from 'protractor';
+import { Selector } from 'testcafe';
+
+import { browser } from '../utils';
+
+const elementWithIdOrClassName = Selector((value) => {
+  return document.getElementById(value) || document.getElementsByClassName(value);
+});
 
 export class AppPage {
   constructor() {
     // Forces default language
     this.navigateTo();
-    browser.executeScript(() => localStorage.setItem('language', 'en-US'));
+    localStorage.setItem('language', 'en-US');
   }
 
   navigateTo() {
-    return browser.get('/');
+    return browser.goTo('/');
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return Selector(elementWithIdOrClassName('app-root h1')).textContent;
   }
 }

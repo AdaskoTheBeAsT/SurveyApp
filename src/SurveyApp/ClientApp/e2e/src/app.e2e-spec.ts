@@ -1,14 +1,16 @@
 import { AppPage } from './app.po';
 
-describe('app', () => {
-  let page: AppPage;
+let page: AppPage;
 
-  beforeEach(() => {
+fixture('App')
+  // .httpAuth(getCredentials())
+  .beforeEach(async (t) => {
     page = new AppPage();
   });
 
-  it('should display hello message', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Hello world !');
-  });
+test('should display hello message', async (t) => {
+  await page.navigateTo();
+  const paragraphText = await page.getParagraphText();
+
+  await t.expect(paragraphText).contains('Hello world !');
 });

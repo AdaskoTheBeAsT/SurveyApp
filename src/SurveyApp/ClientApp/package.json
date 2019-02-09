@@ -4,20 +4,31 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "build": "yarn run env && ng build --prod",
+    "build": "yarn run env && ng build --extra-webpack-config webpack.extra.js",
+    "prod": "yarn run env && ng build --prod --extra-webpack-config webpack.extra.js",
     "start": "yarn run env && ng serve --aot --proxy-config proxy.conf.js",
     "lint": "ng lint && stylelint \"src/**/*.scss\" --syntax scss && htmlhint \"src\" --config .htmlhintrc",
-    "test": "yarn run env && ng test",
-    "test:ci": "yarn run env && yarn run lint && ng test --code-coverage --watch=false",
-    "e2e": "yarn run env && ng e2e",
+    "lint2": "ng lint ClientApp ClientApp-e2e --format codeFrame --fix && stylelint \"src/**/*.scss\" --syntax scss && htmlhint \"src\" --config .htmlhintrc",
+    "stats": "yarn run env && ng build --stats-json --extra-webpack-config webpack.extra.js",
+    "stats-prod": "yarn run env && ng build --prod --stats-json --extra-webpack-config webpack.extra.js",
+    "stats-report": "webpack-bundle-analyzer ../wwwroot/stats.json",
+    "test": "yarn run env && jest --watch",
+    "test:ci": "yarn run env && yarn run lint && jest --runInBand --coverage",
+    "e2e": "yarn run env && testcafe chrome e2e/**/*.e2e-spec.ts --app \"yarn start\" --app-init-delay 40000 --proxy-bypass http://localhost:4200/",
+    "e2e:remote": "yarn run env && cross-env BASE_URL=%E2E_URL% USERNAME=%USERNAME% PASSWORD=%PASSWORD% testcafe chrome e2e/**/*.e2e-spec.ts --hostname localhost --proxy-bypass %E2E_URL% --reporter spec,xunit:../../../Cake/.artifacts/frontend-e2e-xunit-report.xml,nunit:../../../Cake/.artifacts/frontend-e2e-nunit-report.xml,html:../../../Cake/.artifacts/frontend-e2e-nunit-report.html",
     "translations:extract": "ngx-translate-extract --input ./src --output ./src/translations/template.json --format=json --clean -sort --marker extract",
     "docs": "hads ./docs -o",
     "env": "ngx-scripts env npm_package_version",
-    "prettier": "prettier --write \"./{src,e2e}/**/*.{ts,js,scss}\"",
-    "prettier:check": "prettier --list-different \"./{src,e2e}/**/*.{ts,js,scss}\"",
+    "prettier": "prettier --write \"./{src,e2e}/**/*.{ts,js,tsx,json,md,scss,css,less}\"",
+    "prettier:check": "prettier --list-different \"./{src,e2e}/**/*.{ts,js,tsx,json,md,scss,css,less}\"",
     "postinstall": "yarn run prettier",
     "precommit": "pretty-quick --staged",
-    "generate": "ng generate"
+    "generate": "ng generate",
+    "style": "yarn prettier && yarn lint",
+    "verify": "yarn prettier -l && yarn lint && jest --bail",
+    "ts-lint-console": "tslint --project tsconfig.json --config tslint.json --force src/**/*.ts",
+    "ts-lint": "tslint --project tsconfig.json --config tslint.json  -o ../../../Cake/.artifacts/tslint-result.json -t json --force 'src/**/*.ts'",
+    "create-icon-sprite": "svg2sprite ./src/assets/svg ./src/assets/sprites/sprites.svg --stripAttrs id --stripTags title"
   },
   "husky": {
     "hooks": {
@@ -127,13 +138,11 @@
     "tabWidth": 2,
     "semi": true,
     "bracketSpacing": true,
-    "overrides": [
-      {
-        "files": "*.scss",
-        "options": {
-          "singleQuote": false
-        }
+    "overrides": [{
+      "files": "*.scss",
+      "options": {
+        "singleQuote": false
       }
-    ]
+    }]
   }
 }

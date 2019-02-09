@@ -3,6 +3,8 @@
  * Component-specific style should not go here and be included directly as part of the components.
  */
 
+$bootstrap-sass-asset-helper: true;
+
 // Theme variables, must be included before the libraries to allow overriding defaults
 @import "theme/theme-variables";
 
@@ -12,6 +14,7 @@
 @import "~@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss";
 @import "~@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss";
 @import "~@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
+@import "primeng";
 
 // Theme customization
 @import "theme/theme";
