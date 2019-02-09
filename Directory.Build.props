@@ -33,7 +33,7 @@
         <PackageReference Include="SecurityCodeScan" Version="3.0.0" PrivateAssets="all" />
         <PackageReference Include="SerilogAnalyzer" Version="0.15.0" PrivateAssets="all" />
         <PackageReference Include="SonarAnalyzer.CSharp" Version="7.10.0.7896" PrivateAssets="all" />
-        <PackageReference Include="StyleCop.Analyzers" Version="1.1.1-beta.61" PrivateAssets="all" />
+        <PackageReference Include="StyleCop.Analyzers" Version="1.1.1-rc.94" PrivateAssets="all" />
         
         <!-- Common StyleCop configuration -->
         <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" />

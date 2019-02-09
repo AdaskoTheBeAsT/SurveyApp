@@ -11,7 +11,7 @@ describe('QuoteService', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [CoreModule, HttpClientTestingModule],
-      providers: [HttpCacheService, QuoteService]
+      providers: [HttpCacheService, QuoteService],
     });
   }));
 
@@ -55,7 +55,7 @@ describe('QuoteService', () => {
       });
       httpMock.expectOne({}).flush(null, {
         status: 500,
-        statusText: 'error'
+        statusText: 'error',
       });
     });
   });

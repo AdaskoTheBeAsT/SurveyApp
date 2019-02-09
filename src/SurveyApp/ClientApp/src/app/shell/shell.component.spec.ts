@@ -15,7 +15,7 @@ describe('ShellComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, TranslateModule.forRoot(), NgbModule, CoreModule],
-      declarations: [HeaderComponent, ShellComponent]
+      declarations: [HeaderComponent, ShellComponent],
     }).compileComponents();
   }));
 

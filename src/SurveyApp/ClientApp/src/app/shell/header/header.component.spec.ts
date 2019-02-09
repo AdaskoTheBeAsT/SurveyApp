@@ -14,7 +14,7 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, NgbModule, TranslateModule.forRoot()],
       declarations: [HeaderComponent],
-      providers: [I18nService]
+      providers: [I18nService],
     }).compileComponents();
   }));
 
