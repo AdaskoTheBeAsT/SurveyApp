@@ -13,9 +13,7 @@ const elementWithIdOrClassName = Selector((value) => {
 
 export class AppPage {
   constructor() {
-    // Forces default language
-    this.navigateTo();
-    localStorage.setItem('language', 'en-US');
+    // localStorage.setItem('language', 'en-US');
   }
 
   navigateTo() {
@@ -23,6 +21,6 @@ export class AppPage {
   }
 
   getParagraphText() {
-    return Selector(elementWithIdOrClassName('app-root h1')).textContent;
+    return Selector('app-root h1').textContent;
   }
 }

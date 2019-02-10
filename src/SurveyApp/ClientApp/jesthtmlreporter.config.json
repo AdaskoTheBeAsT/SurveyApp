@@ -1,0 +1,5 @@
+{
+    "pageTitle": "Frontend test",
+    "outputPath": "../../../Cake/.artifacts/frontendunittest/frontend-test-report.html",
+    "includeFailureMsg": true
+}

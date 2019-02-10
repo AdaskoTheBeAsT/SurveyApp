@@ -14,7 +14,7 @@ $bootstrap-sass-asset-helper: true;
 @import "~@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss";
 @import "~@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss";
 @import "~@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
-@import "primeng";
+@import "theme/primeng";
 
 // Theme customization
 @import "theme/theme";

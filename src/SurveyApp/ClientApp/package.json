@@ -5,8 +5,8 @@
   "scripts": {
     "ng": "ng",
     "build": "yarn run env && ng build --extra-webpack-config webpack.extra.js",
-    "prod": "yarn run env && ng build --prod --extra-webpack-config webpack.extra.js",
-    "start": "yarn run env && ng serve --aot --proxy-config proxy.conf.js",
+    "prod": "yarn run env && ng build --prod --aot --extra-webpack-config webpack.extra.js",
+    "start": "yarn run env && ng serve --proxy-config proxy.conf.js",
     "lint": "ng lint && stylelint \"src/**/*.scss\" --syntax scss && htmlhint \"src\" --config .htmlhintrc",
     "lint2": "ng lint ClientApp ClientApp-e2e --format codeFrame --fix && stylelint \"src/**/*.scss\" --syntax scss && htmlhint \"src\" --config .htmlhintrc",
     "stats": "yarn run env && ng build --stats-json --extra-webpack-config webpack.extra.js",
@@ -14,8 +14,9 @@
     "stats-report": "webpack-bundle-analyzer ../wwwroot/stats.json",
     "test": "yarn run env && jest --watch",
     "test:ci": "yarn run env && yarn run lint && jest --runInBand --coverage",
+    "test:ci2": "jest --coverage",
     "e2e": "yarn run env && testcafe chrome e2e/**/*.e2e-spec.ts --app \"yarn start\" --app-init-delay 40000 --proxy-bypass http://localhost:4200/",
-    "e2e:remote": "yarn run env && cross-env BASE_URL=%E2E_URL% USERNAME=%USERNAME% PASSWORD=%PASSWORD% testcafe chrome e2e/**/*.e2e-spec.ts --hostname localhost --proxy-bypass %E2E_URL% --reporter spec,xunit:../../../Cake/.artifacts/frontend-e2e-xunit-report.xml,nunit:../../../Cake/.artifacts/frontend-e2e-nunit-report.xml,html:../../../Cake/.artifacts/frontend-e2e-nunit-report.html",
+    "e2e:remote": "yarn run env && cross-env BASE_URL=%E2E_URL% USERNAME=%USERNAME% PASSWORD=%PASSWORD% testcafe chrome e2e/**/*.e2e-spec.ts --hostname localhost --proxy-bypass %E2E_URL% --reporter spec,xunit:../../../Cake/.artifacts/frontende2etest/frontend-e2e.xunit.xml,nunit:../../../Cake/.artifacts/frontende2etest/frontend-e2e.nunit.xml,html:../../../Cake/.artifacts/frontende2etest/frontend-e2e.html",
     "translations:extract": "ngx-translate-extract --input ./src --output ./src/translations/template.json --format=json --clean -sort --marker extract",
     "docs": "hads ./docs -o",
     "env": "ngx-scripts env npm_package_version",
@@ -46,9 +47,13 @@
     ]
   },
   "jestSonar": {
-    "reportPath": "../../../Cake/.artifacts",
-    "reportFile": "frontend-test-report.xml",
+    "reportPath": "../../../Cake/.artifacts/frontendunittest/",
+    "reportFile": "frontend-test.sonar.xml",
     "indent": 4
+  },
+  "jestNunitReporter": {
+    "outputPath": "../../../Cake/.artifacts/frontendunittest/",
+    "outputFilename": "frontend-test.nunit.xml"
   },
   "dependencies": {
     "@angular/animations": "^7.2.4",
@@ -92,6 +97,7 @@
     "@ngx-rocket/scripts": "^3.0.1",
     "@ngxs/devtools-plugin": "^3.3.4",
     "@ngxs/logger-plugin": "^3.3.4",
+    "@types/cucumber": "^4.0.4",
     "@types/jest": "^24.0.0",
     "@types/lodash": "^4.14.120",
     "@types/node": "^10.12.24",
@@ -103,6 +109,9 @@
     "https-proxy-agent": "^2.2.1",
     "husky": "^1.3.1",
     "jest": "^24.1.0",
+    "jest-html-reporter": "^2.4.4",
+    "jest-multi-test-result-processor": "^1.0.0",
+    "jest-nunit-reporter": "^1.3.1",
     "jest-preset-angular": "^6.0.2",
     "jest-sonar-reporter": "^2.0.0",
     "lint-staged": "^8.1.3",
@@ -122,6 +131,7 @@
     "testcafe-reporter-html": "^1.4.4",
     "testcafe-reporter-nunit": "^0.1.2",
     "testcafe-reporter-xunit": "^2.1.0",
+    "ts-jest": "^23.10.5",
     "ts-node": "~8.0.2",
     "tslint": "~5.12.1",
     "tslint-config-prettier": "^1.18.0",
@@ -138,11 +148,13 @@
     "tabWidth": 2,
     "semi": true,
     "bracketSpacing": true,
-    "overrides": [{
-      "files": "*.scss",
-      "options": {
-        "singleQuote": false
+    "overrides": [
+      {
+        "files": "*.scss",
+        "options": {
+          "singleQuote": false
+        }
       }
-    }]
+    ]
   }
 }
