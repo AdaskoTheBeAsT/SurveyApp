@@ -13,6 +13,7 @@ const webStorageMock = () => {
 
 Object.defineProperty(window, 'localStorage', { value: webStorageMock() });
 Object.defineProperty(window, 'sessionStorage', { value: webStorageMock() });
+
 Object.defineProperty(document, 'doctype', {
   value: '<!DOCTYPE html>',
 });

@@ -12,5 +12,5 @@ test('should display hello message', async (t) => {
   await page.navigateTo();
   const paragraphText = await page.getParagraphText();
 
-  await t.expect(paragraphText).contains('Hello world !');
+  await t.expect(paragraphText).contains(' Welcome to ClientApp! ');
 });

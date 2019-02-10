@@ -1,8 +1,4 @@
-/*
- * Entry point of global application style.
- * Component-specific style should not go here and be included directly as part of the components.
- */
-
+/* You can add global styles to this file, and also import other style files */
 $bootstrap-sass-asset-helper: true;
 
 // Theme variables, must be included before the libraries to allow overriding defaults

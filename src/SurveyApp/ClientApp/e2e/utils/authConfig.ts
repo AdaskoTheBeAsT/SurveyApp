@@ -18,7 +18,7 @@ export function getCredentials(): HTTPAuthCredentials {
   const domain = process.env.USERNAME.substr(0, pos);
   const user = process.env.USERNAME.substr(pos + 1, process.env.USERNAME.length - pos - 1);
   return {
-    domain: domain,
+    domain,
     username: user,
     password: process.env.PASSWORD,
   };

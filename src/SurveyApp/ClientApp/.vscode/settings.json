@@ -12,5 +12,6 @@
   "typescript.format.enable": false,
   "jest.autoEnable": false,
   "jest.pathToJest": "",
-  "jestrunner.jestPath": "${workspaceFolder}/node_modules/jest/bin/jest.js"
+  "jestrunner.jestPath": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+  "files.insertFinalNewline": true
 }
