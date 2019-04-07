@@ -11,7 +11,7 @@ const {
 const jestConfig = {
   preset: 'jest-preset-angular',
   testURL: 'http://localhost', // https://github.com/facebook/jest/issues/6766
-  setupTestFrameworkScriptFile: '<rootDir>/src/setup-jest.ts',
+  setupFilesAfterEnv: ['<rootDir>/src/setup-jest.ts'],
   coverageReporters: ['lcov', 'text'],
   testMatch: [
     '<rootDir>/src/**/*.(spec|test).+(ts|js)?(x)',
