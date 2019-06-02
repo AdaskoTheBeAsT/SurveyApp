@@ -5,23 +5,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;
 using SimpleInjector;
+using SurveyApp.Middleware;
 
 namespace SurveyApp
 {
-#pragma warning disable CA1822 // Mark members as static
     public sealed partial class Startup
         : IDisposable
     {
-        private Container _container;
+        private Container _container = new Container();
 
-        public Startup(
-            IConfiguration configuration,
-            IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            _container = new Container();
             Configuration = configuration;
-            StartupLogging(env);
         }
 
         public IConfiguration Configuration { get; }
@@ -30,27 +27,28 @@ namespace SurveyApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureServicesIoC(services);
             ConfigureServicesSwagger(services);
             ConfigureServicesCors(services);
 
             services
                 .AddWebApi()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .ConfigureJson();
+
+            ConfigureServicesIoC(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            ConfigureIoC(app);
-            ConfigureLoggingAfterIoC();
-            ConfigureMapping();
-            _container.Verify();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            ConfigureIoC(app);
+            ConfigureMapping();
+            _container.Verify();
 
             ConfigureSwagger(app);
             ConfigureCors(app);
@@ -60,11 +58,19 @@ namespace SurveyApp
                 {
                     OnPrepareResponse = context =>
                     {
-                        context.Context.Response.Headers.Append("Cache-Control", "no-cache, no-store");
-                        context.Context.Response.Headers.Append("Pragma", "no-cache");
-                        context.Context.Response.Headers.Append("Expires", "-1");
+                        if (context.File.Name == "index.html")
+                        {
+                            context.Context.Response.Headers.Append(HeaderNames.CacheControl, "no-cache,no-store");
+                            context.Context.Response.Headers.Append(HeaderNames.Pragma, "no-cache");
+                            context.Context.Response.Headers.Append(HeaderNames.Expires, "-1");
+                        }
+                        else
+                        {
+                            context.Context.Response.Headers[HeaderNames.CacheControl] = "public,max-age=86400";
+                        }
                     },
                 });
+
             app.UseMvc();
         }
 
@@ -83,5 +89,4 @@ namespace SurveyApp
             }
         }
     }
-#pragma warning restore CA1822 // Mark members as static
 }

@@ -6,12 +6,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace SurveyApp
+namespace SurveyApp.Middleware
 {
-#pragma warning disable CA1822 // Mark members as static
-    public partial class Startup
+    public static class MvcBuilderJsonExtension
     {
-        public void ConfigureJson(IMvcBuilder builder)
+        public static void ConfigureJson(this IMvcBuilder builder)
         {
             builder.AddJsonOptions(options =>
             {
@@ -62,10 +61,10 @@ namespace SurveyApp
             : ISerializationBinder
         {
             private readonly HashSet<Type> _allowedTypes = new HashSet<Type>
-            {
-                typeof(Exception),
-                typeof(List<Exception>),
-            };
+                {
+                    typeof(Exception),
+                    typeof(List<Exception>),
+                };
 
             public Type BindToType(string assemblyName, string typeName)
             {
@@ -87,5 +86,4 @@ namespace SurveyApp
             }
         }
     }
-#pragma warning restore CA1822 // Mark members as static
 }

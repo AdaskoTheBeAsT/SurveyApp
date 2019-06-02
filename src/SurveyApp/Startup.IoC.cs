@@ -1,32 +1,39 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleInjector;
-using SimpleInjector.Integration.AspNetCore.Mvc;
-using SimpleInjector.Lifestyles;
+using SurveyApp.Middleware;
 
 namespace SurveyApp
 {
-#pragma warning disable CA1822 // Mark members as static
     public partial class Startup
     {
         public void ConfigureServicesIoC(IServiceCollection services)
         {
-            // Simple injector part for proper controller activation
-            _container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<IControllerActivator>(
-                new SimpleInjectorControllerActivator(_container));
-            services.EnableSimpleInjectorCrossWiring(_container);
-            services.UseSimpleInjectorAspNetRequestScoping(_container);
+            services.AddSimpleInjector(
+                _container,
+                options =>
+                {
+                    // AddAspNetCore() wraps web requests in a Simple Injector scope.
+                    options.AddAspNetCore()
+
+                        // Ensure activation of a specific framework type to be created by
+                        // Simple Injector instead of the built-in configuration system.
+                        .AddControllerActivation();
+                });
         }
 
         public void ConfigureIoC(IApplicationBuilder app)
         {
-            _container.RegisterMvcControllers(app);
-            _container.AutoCrossWireAspNetComponents(app);
+            // UseSimpleInjector() enables framework services to be injected into
+            // application components, resolved by Simple Injector.
+            app.UseSimpleInjector(
+                _container,
+                options =>
+                {
+                    // Optionally, allow application components to depend on the
+                    // non-generic Microsoft.Extensions.Logging.ILogger abstraction.
+                    options.UseLogging();
+                });
         }
     }
-#pragma warning restore CA1822 // Mark members as static
 }

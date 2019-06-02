@@ -4,7 +4,6 @@ using SurveyApp.Mapping;
 
 namespace SurveyApp
 {
-#pragma warning disable CA1822 // Mark members as static
     public partial class Startup
     {
         public void ConfigureMapping()
@@ -19,5 +18,4 @@ namespace SurveyApp
             return mapper;
         }
     }
-#pragma warning restore CA1822 // Mark members as static
 }

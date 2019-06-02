@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace SurveyApp
 {
-    #pragma warning disable CA1822 // Mark members as static
     public partial class Startup
     {
         public static readonly string AllowDev = "AllowDev";
@@ -17,9 +16,10 @@ namespace SurveyApp
                     AllowDev,
                     p =>
                         p
-                            .WithOrigins("http://localhost:4200")
                             .AllowAnyMethod()
-                            .AllowAnyHeader()));
+                            .AllowAnyHeader()
+                            .SetIsOriginAllowed(_ => true)
+                            .AllowCredentials()));
 
             services.Configure<MvcOptions>(options => options.Filters.Add(new CorsAuthorizationFilterFactory(AllowDev)));
         }
@@ -29,5 +29,4 @@ namespace SurveyApp
             app.UseCors(AllowDev);
         }
     }
-    #pragma warning restore CA1822 // Mark members as static
 }

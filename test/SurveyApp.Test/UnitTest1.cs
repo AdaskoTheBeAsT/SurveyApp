@@ -9,6 +9,7 @@ namespace SurveyApp.Test
         public void Test1()
         {
             // no op - will be done in a moment ;)
+            Assert.True(true);
         }
     }
 }
