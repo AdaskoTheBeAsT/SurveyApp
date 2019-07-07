@@ -111,7 +111,6 @@
     "jest-sonar-reporter": "^2.0.0",
     "lint-staged": "^8.1.7",
     "ng-mocks": "^7.8.0",
-    "ngx-build-plus": "^8.0.3",
     "prettier": "^1.17.1",
     "pretty-quick": "^1.11.0",
     "puppeteer": "^1.17.0",
