@@ -15,10 +15,4 @@
         <ProjectReference Include="..\..\src\SurveyApp\SurveyApp.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <SpecFlowFeatureFiles Update="WebAppStart.feature">
-        <Generator>SpecFlowSingleFileGenerator</Generator>
-      </SpecFlowFeatureFiles>
-    </ItemGroup>
-
 </Project>
