@@ -9,6 +9,10 @@ Sample Single Page Application for showing .net core web api integration with an
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=AdaskoTheBeAsT_SurveyApp)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_SurveyApp)
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/AdaskoTheBeAsT/SurveyApp.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/AdaskoTheBeAsT/SurveyApp/alerts/)
+
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/AdaskoTheBeAsT/SurveyApp.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/AdaskoTheBeAsT/SurveyApp/context:javascript)
+
 ## Influential articles
 
 1. [Removing the MVC Razor dependencies from the Web API template in ASP.NET Core](https://andrewlock.net/removing-the-mvc-razor-dependencies-from-the-web-api-template-in-asp-net-core/)
