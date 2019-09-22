@@ -21,7 +21,7 @@ namespace SurveyApp.IntegrationTest
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Xunit.Collection("IntegrationParallel")]
     [Xunit.TraitAttribute("Category", "xunit:collection(IntegrationParallel)")]
-    public partial class WebAppStartFeature : Xunit.IClassFixture<WebAppStartFeature.FixtureData>, System.IDisposable
+    public partial class StartFeature : Xunit.IClassFixture<StartFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,10 +31,10 @@ namespace SurveyApp.IntegrationTest
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "WebAppStart.feature"
+#line 1 "Start.feature"
 #line hidden
         
-        public WebAppStartFeature(WebAppStartFeature.FixtureData fixtureData, InternalSpecFlow.XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public StartFeature(StartFeature.FixtureData fixtureData, InternalSpecFlow.XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -43,7 +43,8 @@ namespace SurveyApp.IntegrationTest
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "WebAppStart", null, ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Start", "\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
+                    "f two numbers", ProgrammingLanguage.CSharp, new string[] {
                         "xunit:collection(IntegrationParallel)"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -84,14 +85,14 @@ namespace SurveyApp.IntegrationTest
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Startup is launching properly")]
-        [Xunit.TraitAttribute("FeatureTitle", "WebAppStart")]
-        [Xunit.TraitAttribute("Description", "Startup is launching properly")]
-        public virtual void StartupIsLaunchingProperly()
+        [Xunit.SkippableFactAttribute(DisplayName="Add two numbers")]
+        [Xunit.TraitAttribute("FeatureTitle", "Start")]
+        [Xunit.TraitAttribute("Description", "Add two numbers")]
+        public virtual void AddTwoNumbers()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Startup is launching properly", null, ((string[])(null)));
-#line 4
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", null, ((string[])(null)));
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -111,14 +112,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 5
- testRunner.Given("I have web application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 8
+ testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 6
- testRunner.When("I invoke version endpoint", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 9
+ testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 7
- testRunner.Then("I will receive version \'1.0.0\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 10
+ testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 11
+ testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -131,12 +135,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                WebAppStartFeature.FeatureSetup();
+                StartFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                WebAppStartFeature.FeatureTearDown();
+                StartFeature.FeatureTearDown();
             }
         }
     }

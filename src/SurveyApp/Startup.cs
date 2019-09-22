@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
+using Newtonsoft.Json;
+using Serilog;
 using SimpleInjector;
-using SurveyApp.Middleware;
 
 namespace SurveyApp
 {
@@ -31,15 +33,26 @@ namespace SurveyApp
             ConfigureServicesCors(services);
 
             services
-                .AddWebApi()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .ConfigureJson();
+                .AddControllers()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(
+                    options =>
+                    {
+                        // https://security-code-scan.github.io/#SCS0028
+                        // implemented as white list
+#pragma warning disable SCS0028
+                        options.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
+#pragma warning restore SCS0028
+                        options.SerializerSettings.SerializationBinder = new LimitedBinder();
+                        options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Include;
+                        options.SerializerSettings.NullValueHandling = NullValueHandling.Include;
+                    });
 
             ConfigureServicesIoC(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -51,7 +64,6 @@ namespace SurveyApp
             _container.Verify();
 
             ConfigureSwagger(app);
-            ConfigureCors(app);
             app.UseDefaultFiles();
             app.UseStaticFiles(
                 new StaticFileOptions
@@ -71,13 +83,18 @@ namespace SurveyApp
                     },
                 });
 
-            app.UseMvc();
+            app.UseRouting();
+            ConfigureCors(app);
+
+            app.UseEndpoints(
+                endpoints => endpoints.MapDefaultControllerRoute());
+
+            Log.Information("Started");
         }
 
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         private void Dispose(bool disposing)
@@ -85,7 +102,6 @@ namespace SurveyApp
             if (disposing)
             {
                 _container?.Dispose();
-                _container = null;
             }
         }
     }

@@ -20,6 +20,7 @@
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <WarningsAsErrors />
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -27,13 +28,13 @@
         <PackageReference Include="AsyncFixer" Version="1.1.6" PrivateAssets="all" />
         <PackageReference Include="Asyncify" Version="0.9.7" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.2.12-alpha" PrivateAssets="all" />
-        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.5-beta1.final" PrivateAssets="all" />
         <PackageReference Include="Roslynator.Analyzers" Version="2.1.0" PrivateAssets="all" />
         <PackageReference Include="Roslynator.CodeFixes" Version="2.0.0" PrivateAssets="all" />
-        <PackageReference Include="SecurityCodeScan" Version="3.2.0" PrivateAssets="all" />
+        <PackageReference Include="SecurityCodeScan" Version="3.3.0" PrivateAssets="all" />
         <PackageReference Include="SerilogAnalyzer" Version="0.15.0" PrivateAssets="all" />
-        <PackageReference Include="SonarAnalyzer.CSharp" Version="7.15.0.8572" PrivateAssets="all" />
-        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all" />
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="7.16.0.8981" PrivateAssets="all" />
+        <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.66" PrivateAssets="all" />
         
         <!-- Common StyleCop configuration -->
         <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" />

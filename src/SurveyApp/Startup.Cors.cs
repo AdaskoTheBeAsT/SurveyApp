@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace SurveyApp
@@ -20,8 +18,6 @@ namespace SurveyApp
                             .AllowAnyHeader()
                             .SetIsOriginAllowed(_ => true)
                             .AllowCredentials()));
-
-            services.Configure<MvcOptions>(options => options.Filters.Add(new CorsAuthorizationFilterFactory(AllowDev)));
         }
 
         public void ConfigureCors(IApplicationBuilder app)

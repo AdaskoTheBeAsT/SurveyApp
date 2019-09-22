@@ -1,35 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace SurveyApp.Middleware
+namespace SurveyApp
 {
-    public static class MvcBuilderJsonExtension
+    public partial class Startup
     {
-        public static void ConfigureJson(this IMvcBuilder builder)
-        {
-            builder.AddJsonOptions(options =>
-            {
-                // https://security-code-scan.github.io/#SCS0028
-                // implemented as white list
-#pragma warning disable SCS0028
-                options.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
-#pragma warning restore SCS0028
-                options.SerializerSettings.SerializationBinder = new LimitedBinder();
-                options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Include;
-                options.SerializerSettings.NullValueHandling = NullValueHandling.Include;
-                options.SerializerSettings.Converters.Add(new StringEnumConverter
-                {
-                    CamelCaseText = true,
-                    AllowIntegerValues = true,
-                });
-            });
-        }
-
 #pragma warning disable CA1034
         [Serializable]
         public class TypeNotWhitelistedException
@@ -61,10 +38,10 @@ namespace SurveyApp.Middleware
             : ISerializationBinder
         {
             private readonly HashSet<Type> _allowedTypes = new HashSet<Type>
-                {
-                    typeof(Exception),
-                    typeof(List<Exception>),
-                };
+            {
+                typeof(Exception),
+                typeof(List<Exception>),
+            };
 
             public Type BindToType(string assemblyName, string typeName)
             {

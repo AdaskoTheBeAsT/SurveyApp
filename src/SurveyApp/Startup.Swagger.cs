@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SurveyApp
@@ -30,7 +31,7 @@ namespace SurveyApp
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc(V1, new Info { Title = nameof(Startup), Version = V1 });
+                c.SwaggerDoc(V1, new OpenApiInfo { Title = "EPCalculator API", Version = V1 });
 
                 // Set the comments path for the swagger json and ui.
                 // based on http://michaco.net/blog/TipsForUsingSwaggerAndAutorestInAspNetCoreMvcServices

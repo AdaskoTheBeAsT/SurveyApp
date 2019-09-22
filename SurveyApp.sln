@@ -25,6 +25,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".props", ".props", "{5302DEAF-1C4E-4EBF-A3B4-CB9624CC8249}"
 	ProjectSection(SolutionItems) = preProject
 		test\Directory.Build.props = test\Directory.Build.props
+		test\GlobalSuppressions.cs = test\GlobalSuppressions.cs
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyApp.Test", "test\SurveyApp.Test\SurveyApp.Test.csproj", "{69B767B9-69CD-4559-976E-E9FD2AB91F64}"
