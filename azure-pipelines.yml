@@ -15,10 +15,10 @@ variables:
 
 steps:
 - task: DotNetCoreInstaller@0
-  displayName: 'Use .NET Core sdk 2.2.300'
+  displayName: 'Use .NET Core sdk 3.0.100-rc1-014190'
   inputs:
     packageType: 'sdk'
-    version: '2.2.300'
+    version: '3.0.100-rc1-014190'
 
 - task: NodeTool@0
   displayName: 'Use Node 10.16.x'
