@@ -16,7 +16,7 @@ namespace SurveyApp
     public sealed partial class Startup
         : IDisposable
     {
-        private Container _container = new Container();
+        private readonly Container _container = new Container();
 
         public Startup(IConfiguration configuration)
         {

@@ -1,0 +1,8 @@
+# Editor configuration, see http://editorconfig.org
+root = true
+
+[*.csproj]
+indent_size = 2
+
+[*.ruleset]
+indent_size = 2

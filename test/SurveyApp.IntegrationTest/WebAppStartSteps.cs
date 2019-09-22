@@ -37,7 +37,7 @@ namespace SurveyApp.IntegrationTest
         }
 
         [When("I invoke version endpoint")]
-        public async Task WhenIInvokeVersionEndpoint()
+        public async Task WhenIInvokeVersionEndpointAsync()
         {
             using (var client = _testServer.CreateClient())
             {
