@@ -34,7 +34,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0-rc1.19457.4" />
+        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
         <PackageReference Include="SpecFlow" Version="3.1.32-beta" />
         <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.1.32-beta" />
