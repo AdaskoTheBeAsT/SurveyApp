@@ -53,7 +53,7 @@ namespace SurveyApp.Mapping
                 }
             }
 
-            var profileTypes = assemblies.SelectMany(ay => ay.GetTypes().Where(t => typeof(Profile).IsAssignableFrom(t))).Select(t => t);
+            var profileTypes = assemblies.SelectMany(ay => ay.GetTypes().Where(t => typeof(Profile).IsAssignableFrom(t)));
             return CreateProfiles(profileTypes);
         }
 
