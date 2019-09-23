@@ -10,7 +10,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <LangVersion>latest</LangVersion>
+        <LangVersion>8.0</LangVersion>
     </PropertyGroup>
     
     <!-- Based on article https://www.thomaslevesque.com/2017/09/18/common-msbuild-properties-and-items-with-directory-build-props/ -->
@@ -21,6 +21,7 @@
         <WarningsAsErrors />
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NoWarn>$(NoWarn);1591</NoWarn>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>

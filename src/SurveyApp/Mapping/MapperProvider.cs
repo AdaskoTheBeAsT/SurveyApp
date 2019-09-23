@@ -66,7 +66,14 @@ namespace SurveyApp.Mapping
 
             foreach (var type in types)
             {
-                yield return Activator.CreateInstance(type) as Profile;
+                var instance = Activator.CreateInstance(type);
+                var profile = instance as Profile;
+                if (profile is null)
+                {
+                    continue;
+                }
+
+                yield return profile;
             }
         }
     }

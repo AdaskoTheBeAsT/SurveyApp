@@ -32,6 +32,31 @@ namespace SurveyApp
             {
             }
         }
+
+        [Serializable]
+        public class TypeNotFoundException
+            : Exception
+        {
+            public TypeNotFoundException()
+                : base()
+            {
+            }
+
+            public TypeNotFoundException(string message)
+                : base(message)
+            {
+            }
+
+            public TypeNotFoundException(string message, Exception innerException)
+                : base(message, innerException)
+            {
+            }
+
+            protected TypeNotFoundException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+                : base(serializationInfo, streamingContext)
+            {
+            }
+        }
 #pragma warning restore CA1034
 
         private class LimitedBinder
@@ -46,6 +71,11 @@ namespace SurveyApp
             public Type BindToType(string assemblyName, string typeName)
             {
                 var type = Type.GetType($"{typeName}, {assemblyName}", true);
+                if (type is null)
+                {
+                    throw new TypeNotWhitelistedException();
+                }
+
                 if (_allowedTypes.Contains(type))
                 {
                     return type;
@@ -58,7 +88,7 @@ namespace SurveyApp
 
             public void BindToName(Type serializedType, out string assemblyName, out string typeName)
             {
-                assemblyName = null;
+                assemblyName = string.Empty;
                 typeName = serializedType.Name;
             }
         }

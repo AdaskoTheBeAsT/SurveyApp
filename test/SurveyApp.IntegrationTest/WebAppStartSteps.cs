@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
 using TechTalk.SpecFlow;
+using Xunit.Sdk;
 
 namespace SurveyApp.IntegrationTest
 {
@@ -15,8 +16,8 @@ namespace SurveyApp.IntegrationTest
     public sealed class WebAppStartSteps
         : IDisposable
     {
-        private TestServer _testServer;
-        private Version _result;
+        private TestServer? _testServer;
+        private Version? _result;
 
         [Given("I have web application")]
         public void GivenIHaveWebApplication()
@@ -39,21 +40,24 @@ namespace SurveyApp.IntegrationTest
         [When("I invoke version endpoint")]
         public async Task WhenIInvokeVersionEndpointAsync()
         {
-            using (var client = _testServer.CreateClient())
+            if (_testServer is null)
             {
-#pragma warning disable CA2234 // Pass system uri objects instead of strings
-                var response = await client.GetAsync("/api/version");
-#pragma warning restore CA2234 // Pass system uri objects instead of strings
-                response.EnsureSuccessStatusCode();
-                var content = await response.Content.ReadAsStringAsync();
-                var jobject = JObject.Parse(content);
-
-                var major = jobject["major"].Value<int>();
-                var minor = jobject["minor"].Value<int>();
-                var build = jobject["build"].Value<int>();
-
-                _result = new Version(major, minor, build);
+                throw new NullException(_testServer);
             }
+
+            using var client = _testServer.CreateClient();
+#pragma warning disable CA2234 // Pass system uri objects instead of strings
+            var response = await client.GetAsync("/api/version");
+#pragma warning restore CA2234 // Pass system uri objects instead of strings
+            response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+            var jobject = JObject.Parse(content);
+
+            var major = jobject["major"].Value<int>();
+            var minor = jobject["minor"].Value<int>();
+            var build = jobject["build"].Value<int>();
+
+            _result = new Version(major, minor, build);
         }
 
         [Then("I will receive version '([^\\.]*)\\.([^\\.]*)\\.([^\\.]*)'")]
@@ -66,7 +70,6 @@ namespace SurveyApp.IntegrationTest
         public void Dispose()
         {
             _testServer?.Dispose();
-            _testServer = null;
         }
     }
 }
