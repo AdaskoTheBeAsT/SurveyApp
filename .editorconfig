@@ -1,6 +1,10 @@
 # Editor configuration, see http://editorconfig.org
 root = true
 
+[*]
+end_of_line = crlf
+charset = utf-8
+
 [*.csproj]
 indent_size = 2
 
