@@ -6,3 +6,6 @@ indent_size = 2
 
 [*.ruleset]
 indent_size = 2
+
+[*.props]
+indent_size = 2
