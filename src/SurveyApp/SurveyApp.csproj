@@ -10,7 +10,7 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="AutoMapper" Version="9.0.0" />
-    <PackageReference Include="FluentValidation" Version="8.5.0-preview5" />
+    <PackageReference Include="FluentValidation" Version="8.5.0" />
     <PackageReference Include="Serilog" Version="2.9.0-dev-01124" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.0.1-dev-00099" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.1-dev-00209" />
