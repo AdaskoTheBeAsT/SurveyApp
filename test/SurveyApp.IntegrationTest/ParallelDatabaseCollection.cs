@@ -1,10 +1,10 @@
-﻿using Xunit;
+using Xunit;
 
 namespace SurveyApp.IntegrationTest
 {
     [CollectionDefinition(TestCollectionName.IntegrationParallel)]
     public class ParallelDatabaseCollection
-        : ICollectionFixture<TestFixture>
+        : ICollectionFixture<WebAppFixture>
     {
     }
 }
