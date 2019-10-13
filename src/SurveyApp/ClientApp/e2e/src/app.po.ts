@@ -7,7 +7,8 @@ import { Selector } from 'testcafe';
 
 import { browser } from '../utils';
 
-const elementWithIdOrClassName = Selector((value) => { //lgtm [js/unused-local-variable]
+const elementWithIdOrClassName = Selector((value) => {
+  //lgtm [js/unused-local-variable]
   return document.getElementById(value) || document.getElementsByClassName(value);
 });
 
