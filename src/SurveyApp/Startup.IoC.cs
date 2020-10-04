@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleInjector;
 
@@ -18,6 +18,7 @@ namespace SurveyApp
                         // Ensure activation of a specific framework type to be created by
                         // Simple Injector instead of the built-in configuration system.
                         .AddControllerActivation();
+                    options.AddLogging();
                 });
         }
 
@@ -25,14 +26,7 @@ namespace SurveyApp
         {
             // UseSimpleInjector() enables framework services to be injected into
             // application components, resolved by Simple Injector.
-            app.UseSimpleInjector(
-                _container,
-                options =>
-                {
-                    // Optionally, allow application components to depend on the
-                    // non-generic Microsoft.Extensions.Logging.ILogger abstraction.
-                    options.UseLogging();
-                });
+            app.UseSimpleInjector(_container);
         }
     }
 }

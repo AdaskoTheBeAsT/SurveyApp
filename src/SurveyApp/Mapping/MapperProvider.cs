@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -42,9 +42,9 @@ namespace SurveyApp.Mapping
 
             foreach (var referencedAssemblyName in assembly
                 .GetReferencedAssemblies()
-                .Where(a => a.FullName.StartsWith("SurveyApp", StringComparison.OrdinalIgnoreCase)))
+                .Where(a => a.FullName.StartsWith(nameof(SurveyApp), StringComparison.OrdinalIgnoreCase)))
             {
-                var referencedAssembly = loadedAssemblies.Find(l => l.FullName == referencedAssemblyName.FullName)
+                var referencedAssembly = loadedAssemblies.Find(l => string.Equals(l.FullName, referencedAssemblyName.FullName, StringComparison.OrdinalIgnoreCase))
                     ?? AppDomain.CurrentDomain.Load(referencedAssemblyName);
                 if (referencedAssembly.GetTypes().Any(t => typeof(Profile).IsAssignableFrom(t))
                     && !assemblies.Contains(referencedAssembly))

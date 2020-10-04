@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -41,7 +41,9 @@ namespace SurveyApp
                         // https://security-code-scan.github.io/#SCS0028
                         // implemented as white list
 #pragma warning disable SCS0028
+#pragma warning disable SEC0030
                         options.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
+#pragma warning restore SEC0030
 #pragma warning restore SCS0028
                         options.SerializerSettings.SerializationBinder = new LimitedBinder();
                         options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Include;
@@ -70,7 +72,7 @@ namespace SurveyApp
                 {
                     OnPrepareResponse = context =>
                     {
-                        if (context.File.Name == "index.html")
+                        if (context.File.Name.Equals("index.html", StringComparison.OrdinalIgnoreCase))
                         {
                             context.Context.Response.Headers.Append(HeaderNames.CacheControl, "no-cache,no-store");
                             context.Context.Response.Headers.Append(HeaderNames.Pragma, "no-cache");

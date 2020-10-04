@@ -30,7 +30,7 @@ namespace SurveyApp.IntegrationTest
         [When("I invoke version endpoint")]
         public async Task WhenIInvokeVersionEndpointAsync()
         {
-            var response = await _system.Scenario(_ => _.Get.Url("/api/version"));
+            var response = await _system.Scenario(_ => _.Get.Url("/api/version")).ConfigureAwait(false);
             var jObject = response.ResponseBody.ReadAsJson<JObject>();
 
             var major = jObject["major"].Value<int>();

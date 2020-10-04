@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SurveyApp.Controllers
@@ -9,7 +9,9 @@ namespace SurveyApp.Controllers
     {
         [HttpGet]
         [ProducesResponseType(typeof(Version), 200)]
+#pragma warning disable SEC0120
         public IActionResult Get()
+#pragma warning restore SEC0120
         {
             return Ok(new Version(1, 0, 0));
         }

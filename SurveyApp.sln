@@ -9,13 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".props", ".props", "{FB911C
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		AdaskoTheBeAsT.ruleset = AdaskoTheBeAsT.ruleset
 		azure-pipelines.yml = azure-pipelines.yml
 		Directory.Build.props = Directory.Build.props
 		global.json = global.json
 		LICENSE = LICENSE
 		README.md = README.md
 		stylecop.json = stylecop.json
-		Survey.ruleset = Survey.ruleset
 		SurveyApp.sln.DotSettings = SurveyApp.sln.DotSettings
 	EndProjectSection
 EndProject

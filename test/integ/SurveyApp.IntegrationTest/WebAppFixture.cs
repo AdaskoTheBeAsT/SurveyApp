@@ -3,12 +3,12 @@ using Alba;
 
 namespace SurveyApp.IntegrationTest
 {
-    public class WebAppFixture
+    public sealed class WebAppFixture
         : IDisposable
     {
         public WebAppFixture()
         {
-            var host = SurveyApp.Program.BuildWebHost(Array.Empty<string>());
+            var host = Program.BuildWebHost(Array.Empty<string>());
 
             SystemUnderTest
                 = new SystemUnderTest(host);
@@ -17,12 +17,6 @@ namespace SurveyApp.IntegrationTest
         public SystemUnderTest SystemUnderTest { get; }
 
         public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
         {
             SystemUnderTest?.Dispose();
         }
