@@ -1,0 +1,17 @@
+{
+  "extends": ["../.eslintrc.json"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["e2e//tsconfig.*?.json","e2e//e2e/tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "rules": {}
+    },
+    {
+      "files": ["*.component.html"],
+      "rules": {}
+    }
+  ]
+}

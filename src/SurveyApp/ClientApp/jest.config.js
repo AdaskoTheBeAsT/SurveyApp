@@ -13,11 +13,10 @@ const jestConfig = {
   testURL: 'http://localhost', // https://github.com/facebook/jest/issues/6766
   setupFilesAfterEnv: ['<rootDir>/src/setup-jest.ts'],
   coverageReporters: ['lcov', 'text'],
-  testMatch: [
-    '<rootDir>/src/**/*.(spec|test).+(ts|js)?(x)',
-    '<rootDir>/src/**/__tests__/**/*.+(ts|js)?(x)',
-    '<rootDir>/src/**/+(*.)+(spec|test).+(ts|js)?(x)'
-  ],
+  testMatch: ['<rootDir>/**/*(*.)@(spec|test).[tj]s?(x)'],
+  transform: {
+    '^.+\\.(ts|js|html)$': 'ts-jest',
+  },
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/src/'
   }),
